@@ -13,14 +13,14 @@
 //     ${Object.keys(breedList).map(breed => {
 //       return `<option>${breed}</option>`
 //     }).join("")}
-//   </select> 
+//   </select>
 //   `;
 // };
 
 // function loadByBreed(breed) {
 //   alert(breed);
 // }
-const breedsArray = [];
+let breedsArray = [];
 async function start() {
   const response = await fetch("https://dog.ceo/api/breeds/list/all");
   const data = await response.json();
@@ -28,12 +28,12 @@ async function start() {
 }
 
 start();
-
 function createBreedList(breedList) {
-    Object.keys(breedList)
+  Object.keys(breedList)
     .map((breed) => {
       return breedsArray.push(breed);
     })
-  }
+    .join("");
+}
 
-    export default breedsArray;
+export default breedsArray;
