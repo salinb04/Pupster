@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
-import { Image } from "react-bootstrap";
-import { Dropdown } from "react-bootstrap";
+import { Card, Image, Dropdown } from "react-bootstrap";
 import axios from 'axios';
 const breedsArray = [];
 
