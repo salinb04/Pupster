@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Card, Image, Dropdown } from "react-bootstrap";
+import { Card, Image } from "react-bootstrap";
 import axios from 'axios';
-const breedsArray = [];
 
 function Search() {
+  const breedsArray = [];
   const [data, setData] = useState([]);
-  const [imageData, setImageData] = useState([]);
+  const [selectedBreed, setSelectedBreed] = useState("affenpinscher");
+  const [breedImages, setBreedImages] = useState([]);
 
   useEffect(() => {
     axios
@@ -13,13 +14,19 @@ function Search() {
       .then(response => setData(response.data.message));
   }, []);
 
-  function createBreedList(data) {
+  function createBreedsList(data) {
     Object.keys(data)
     .map((breed) => {
-      return breedsArray.push(breed);
+      return breedsArray.push(breed) 
     })
   }
-  createBreedList(data);
+  createBreedsList(data);
+
+  useEffect(() => {
+    axios
+      .get(`https://dog.ceo/api/breed/${selectedBreed}/images`)
+      .then(response => setBreedImages(response.data.message));
+  }, [selectedBreed]);
 
   return (
     <Card>
@@ -28,14 +35,16 @@ function Search() {
         <Card.Title>
           Choose a breed you'd like to see from the dropdown!
           </Card.Title>
-            <select onChange={alert("Hi")}>
-                {breedsArray.map(breed => {
-                  return <option key={breed}>{breed}</option>;
-                })}
+            <select onChange={(event) => setSelectedBreed(event.target.value)}>
+              {breedsArray.map(breed => {
+                return <option key={breedsArray.indexOf(breed)}>{breed}</option>;
+              })}
             </select>
-          
-
-        <Image src="https://dog.ceo/api/breeds/image/random" fluid />
+            <div>
+              {breedImages.map(image => {
+                return <Image key={breedImages.indexOf(image)} src={image} fluid />;
+              })}
+            </div>
       </Card.Body>
     </Card>
   );
