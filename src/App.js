@@ -6,6 +6,8 @@ import Discover from "./components/pages/Discover";
 import Search from "./components/pages/Search";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+
+
 const App = () => {
   return (
     <div>
